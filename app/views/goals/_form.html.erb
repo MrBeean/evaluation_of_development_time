@@ -1,0 +1,19 @@
+
+<%= simple_form_for(@goal) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.association :user %>
+    <%= f.input :title %>
+    <%= f.input :optimal_days %>
+    <%= f.input :normal_days %>
+    <%= f.input :pessimistic_days %>
+    <%= f.input :expected_days %>
+    <%= f.input :deviation_days %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @goal.user %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @goal.title %>
+</p>
+
+<p>
+  <strong>Optimal days:</strong>
+  <%= @goal.optimal_days %>
+</p>
+
+<p>
+  <strong>Normal days:</strong>
+  <%= @goal.normal_days %>
+</p>
+
+<p>
+  <strong>Pessimistic days:</strong>
+  <%= @goal.pessimistic_days %>
+</p>
+
+<p>
+  <strong>Expected days:</strong>
+  <%= @goal.expected_days %>
+</p>
+
+<p>
+  <strong>Deviation days:</strong>
+  <%= @goal.deviation_days %>
+</p>
+
+<%= link_to 'Edit', edit_goal_path(@goal) %> |
+<%= link_to 'Back', goals_path %>
