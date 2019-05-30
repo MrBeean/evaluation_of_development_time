@@ -3,11 +3,11 @@ class CreateGoals < ActiveRecord::Migration[5.2]
     create_table :goals do |t|
       t.references :user, foreign_key: true
       t.string  :title
-      t.integer :optimal_days
-      t.integer :normal_days
-      t.integer :pessimistic_days
-      t.integer :expected_days
-      t.integer :deviation_days
+      t.float :optimal_days
+      t.float :normal_days
+      t.float :pessimistic_days
+      t.float :expected_days
+      t.float :deviation_days
 
       t.timestamps
     end

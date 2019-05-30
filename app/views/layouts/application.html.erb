@@ -10,6 +10,18 @@
   </head>
 
   <body>
-    <%= yield %>
+    <ul>
+      <% if user_signed_in? %>
+        <li style="display: inline;">Вы вошли как пользователь <%= current_user.email %></li>
+        <li style="display: inline;"><%= link_to 'Профиль', edit_user_registration_path %></li>
+        <li style="display: inline;"><%= link_to 'Выйти', destroy_user_session_path,
+                        method: :delete %></li>
+      <% else %>
+        <li style="display: inline;"><%= link_to 'Войти', new_user_session_path %></li>
+        <li style="display: inline;"><%= link_to 'Зарегистрироваться',
+                        new_user_registration_path %></li>
+      <% end %>
+      <%= yield %>
+    </ul>
   </body>
 </html>

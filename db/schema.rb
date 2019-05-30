@@ -15,11 +15,11 @@ ActiveRecord::Schema.define(version: 2019_05_29_184456) do
   create_table "goals", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
-    t.integer "optimal_days"
-    t.integer "normal_days"
-    t.integer "pessimistic_days"
-    t.integer "expected_days"
-    t.integer "deviation_days"
+    t.float "optimal_days"
+    t.float "normal_days"
+    t.float "pessimistic_days"
+    t.float "expected_days"
+    t.float "deviation_days"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_goals_on_user_id"
