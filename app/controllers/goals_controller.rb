@@ -1,8 +1,9 @@
 class GoalsController < ApplicationController
-  before_action :set_goal, only: [:show, :edit, :update, :destroy, :set_fact_day]
+  before_action :set_goal, only: [:show, :edit, :update, :destroy, :set_fact_day, :update_fact_day]
   before_action :authenticate_user!
 
   after_action :set_visible, only: [:create]
+  after_action :set_unvisible, only: [:update_fact_day]
 
   # GET /goals
   # GET /goals.json
@@ -34,7 +35,7 @@ class GoalsController < ApplicationController
 
     respond_to do |format|
       if @goal.save
-        format.html { redirect_to @goal, notice: 'Goal was successfully created.' }
+        format.html { redirect_to @goal, notice: 'Цель создана, успехов.' }
       else
         format.html { render :new }
       end
@@ -45,20 +46,21 @@ class GoalsController < ApplicationController
   # PATCH/PUT /goals/1.json
   def update
     respond_to do |format|
-      if params[:update_fact_days]
-        if @goal.update(goal_params) && @goal.valid?(:fact_days_check)
-          format.html { redirect_to goals_path, notice: 'Успешно заархивироввали' }
-        else
-          format.html { render :set_fact_day }
-        end
+      if @goal.update(goal_params)
+        format.html { redirect_to goals_path, notice: 'Цель успешно изменена.' }
       else
-        if @goal.update(goal_params)
-          format.html { redirect_to goals_path, notice: 'Goal was successfully updated.' }
-        else
-          format.html { render :edit }
-        end
+        format.html { render :edit }
       end
+    end
+  end
 
+  def update_fact_day
+    respond_to do |format|
+      if @goal.update(goal_params) && @goal.valid?(:fact_days_check)
+        format.html { redirect_to goals_path, notice: 'Цель успешно заархивирована' }
+      else
+        format.html { render :set_fact_day }
+      end
     end
   end
 
@@ -67,7 +69,7 @@ class GoalsController < ApplicationController
   def destroy
     @goal.destroy
     respond_to do |format|
-      format.html { redirect_to goals_url, notice: 'Goal was successfully destroyed.' }
+      format.html { redirect_to goals_url, notice: 'Цель уничтожена.' }
       format.json { head :no_content }
     end
   end
@@ -89,5 +91,9 @@ class GoalsController < ApplicationController
 
     def set_visible
       @goal.update(visibility: true)
+    end
+
+    def set_unvisible
+      @goal.update(visibility: false)
     end
 end
