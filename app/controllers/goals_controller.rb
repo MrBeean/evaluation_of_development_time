@@ -1,6 +1,8 @@
 class GoalsController < ApplicationController
-  before_action :set_goal, only: [:show, :edit, :update, :destroy]
+  before_action :set_goal, only: [:show, :edit, :update, :destroy, :set_fact_day]
   before_action :authenticate_user!
+
+  after_action :set_visible, only: [:create]
 
   # GET /goals
   # GET /goals.json
@@ -11,6 +13,9 @@ class GoalsController < ApplicationController
   # GET /goals/1
   # GET /goals/1.json
   def show
+  end
+
+  def set_fact_day
   end
 
   # GET /goals/new
@@ -30,10 +35,8 @@ class GoalsController < ApplicationController
     respond_to do |format|
       if @goal.save
         format.html { redirect_to @goal, notice: 'Goal was successfully created.' }
-        format.json { render :show, status: :created, location: @goal }
       else
         format.html { render :new }
-        format.json { render json: @goal.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,13 +45,20 @@ class GoalsController < ApplicationController
   # PATCH/PUT /goals/1.json
   def update
     respond_to do |format|
-      if @goal.update(goal_params)
-        format.html { redirect_to @goal, notice: 'Goal was successfully updated.' }
-        format.json { render :show, status: :ok, location: @goal }
+      if params[:update_fact_days]
+        if @goal.update(goal_params) && @goal.valid?(:fact_days_check)
+          format.html { redirect_to goals_path, notice: 'Успешно заархивироввали' }
+        else
+          format.html { render :set_fact_day }
+        end
       else
-        format.html { render :edit }
-        format.json { render json: @goal.errors, status: :unprocessable_entity }
+        if @goal.update(goal_params)
+          format.html { redirect_to goals_path, notice: 'Goal was successfully updated.' }
+        else
+          format.html { render :edit }
+        end
       end
+
     end
   end
 
@@ -62,14 +72,22 @@ class GoalsController < ApplicationController
     end
   end
 
+
+
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_goal
       @goal = Goal.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:title, :optimal_days, :normal_days, :pessimistic_days)
+      if params[:update_fact_days]
+        params.require(:goal).permit(:fact_days, :visibility)
+      else
+        params.require(:goal).permit(:title, :optimal_days, :normal_days, :pessimistic_days)
+      end
+    end
+
+    def set_visible
+      @goal.update(visibility: true)
     end
 end

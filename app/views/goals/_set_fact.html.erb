@@ -1,0 +1,16 @@
+
+<%= simple_form_for(@goal) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <p>При архивации, обязательно указать кол-во дней</p>
+    <%= f.input :fact_days %>
+    <%= f.hidden_field :visibility, value: false %>
+  </div>
+
+  <%= hidden_field_tag 'update_fact_days', true %>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
