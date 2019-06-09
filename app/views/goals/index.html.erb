@@ -18,18 +18,21 @@
 
   <tbody>
     <% @goals.each do |goal| %>
-      <tr>
-        <td><%= goal.user.email %></td>
-        <td><%= goal.title %></td>
-        <td><%= goal.optimal_days %></td>
-        <td><%= goal.normal_days %></td>
-        <td><%= goal.pessimistic_days %></td>
-        <td><%= goal.expected_days %></td>
-        <td><%= goal.deviation_days %></td>
-        <td><%= link_to 'Show', goal %></td>
-        <td><%= link_to 'Edit', edit_goal_path(goal) %></td>
-        <td><%= link_to 'Destroy', goal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% if goal.visibility? %>
+        <tr>
+          <td><%= goal.user.email %></td>
+          <td><%= goal.title %></td>
+          <td><%= goal.optimal_days %></td>
+          <td><%= goal.normal_days %></td>
+          <td><%= goal.pessimistic_days %></td>
+          <td><%= goal.expected_days %></td>
+          <td><%= goal.deviation_days %></td>
+          <td><%= link_to 'Show', goal %></td>
+          <td><%= link_to 'Edit', edit_goal_path(goal) %></td>
+          <td><%= link_to 'Удалить', goal_path(goal), method: :delete, data: { confirm: 'Уверены?' } %></td>
+          <td><%= link_to 'Архивировать', set_fact_day_goal_path(goal) %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

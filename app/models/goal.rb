@@ -1,12 +1,14 @@
 class Goal < ApplicationRecord
   belongs_to :user
 
-  validates :title, :optimal_days, :normal_days,
-            :pessimistic_days, :expected_days, :deviation_days, presence: true
-  validates :optimal_days, :normal_days,
-            :pessimistic_days,
+  validates :optimal_days, :normal_days, :pessimistic_days,
+            presence: true,
             numericality: { integer: true, float: true, greater_than: 0 }
-  before_validation :calc_expected_days, :calc_deviation_days
+  validates :fact_days, presence: true,
+            numericality: { integer: true, float: true, greater_than: 0 },
+            on: :fact_days_check
+
+  before_save :calc_expected_days, :calc_deviation_days
 
   private
 

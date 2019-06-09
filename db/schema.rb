@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_29_184456) do
+ActiveRecord::Schema.define(version: 2019_05_30_175645) do
 
   create_table "goals", force: :cascade do |t|
     t.integer "user_id"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2019_05_29_184456) do
     t.float "deviation_days"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "fact_days"
+    t.boolean "visibility", default: false
     t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
