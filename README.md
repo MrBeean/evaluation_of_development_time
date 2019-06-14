@@ -1,24 +1,28 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Для чего
 
-Things you may want to cover:
+Программа позволяет корректно расчитать 
+требуемое время на разработку, используя методологию из системы
+[PERT](https://ru.wikipedia.org/wiki/PERT)
 
-* Ruby version
+### Окружение
 
-* System dependencies
+    ruby  - 2.6.3
+    rails - 5.2.3
 
-* Configuration
+### Установка
 
-* Database creation
+Создайте свой `gemset`, затем выполните команды
 
-* Database initialization
+    gem install bundler
+    bundle
+    bundle exec rake db:create
+    bundle exec rake db:migrate
+    bundle exec rake db:schema:load RAILS_ENV=test
+    
+Запускаем сервер и пользуемся
 
-* How to run the test suite
+### Тесты
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+    bundle exec rspec/spec
