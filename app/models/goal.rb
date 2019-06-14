@@ -1,6 +1,7 @@
 class Goal < ApplicationRecord
   belongs_to :user
 
+  validates :title, presence: true
   validates :optimal_days, :normal_days, :pessimistic_days,
             presence: true,
             numericality: { integer: true, float: true, greater_than: 0 }
