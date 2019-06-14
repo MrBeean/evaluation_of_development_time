@@ -1,39 +1,34 @@
-<p id="notice"><%= notice %></p>
-
+<div class="table-responsive">
+  <table class="table table-striped table-dark">
+    <thead>
+    <tr>
+      <th scope="col">Название задачи</th>
+      <th scope="col">Оптимистическая оценка</th>
+      <th scope="col">Номинальная оценка</th>
+      <th scope="col">Пессимистическая оценка</th>
+      <th scope="col">Ожидаемая продолжительность</th>
+      <th scope="col">Возможное отклонение</th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center">
+        <td><%= @goal.title %></td>
+        <td><%= @goal.optimal_days %></td>
+        <td><%= @goal.normal_days %></td>
+        <td><%= @goal.pessimistic_days %></td>
+        <td><%= @goal.expected_days %></td>
+        <td><%= @goal.deviation_days %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<h3>Используй в разговоре с руководителем:</h3>
 <p>
-  <strong>User:</strong>
-  <%= @goal.user %>
+  По моей оценке времени на решение "<%= @goal.title %>" потребуется
+  <%= t('views.sentence', count: @goal.expected_days) %>, при этом возможно отклонение в
+  <%= t('views.sentence', count: @goal.deviation_days) %>.
 </p>
-
 <p>
-  <strong>Title:</strong>
-  <%= @goal.title %>
+  <%= link_to t('views.button.edit'), edit_goal_path(@goal) %> |
+  <%= link_to t('views.button.back'), goals_path %>
 </p>
-
-<p>
-  <strong>Optimal days:</strong>
-  <%= @goal.optimal_days %>
-</p>
-
-<p>
-  <strong>Normal days:</strong>
-  <%= @goal.normal_days %>
-</p>
-
-<p>
-  <strong>Pessimistic days:</strong>
-  <%= @goal.pessimistic_days %>
-</p>
-
-<p>
-  <strong>Expected days:</strong>
-  <%= @goal.expected_days %>
-</p>
-
-<p>
-  <strong>Deviation days:</strong>
-  <%= @goal.deviation_days %>
-</p>
-
-<%= link_to 'Edit', edit_goal_path(@goal) %> |
-<%= link_to 'Back', goals_path %>

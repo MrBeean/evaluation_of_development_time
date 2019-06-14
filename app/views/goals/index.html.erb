@@ -1,42 +1,34 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Goals</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Пользователь</th>
-      <th>Название задачи</th>
-      <th>Оптимистическая оценка</th>
-      <th>Номинальная оценка</th>
-      <th>Пессимистическая оценка</th>
-      <th>Ожидаемая продолжительность</th>
-      <th>Возможное отклонение</th>
-      <th colspan="3"></th>
+<div class="table-responsive">
+  <table class="table table-striped table-dark">
+    <thead>
+    <tr class="text-center">
+      <th scope="col">Название задачи</th>
+      <th scope="col">Ожидаемая продолжительность (дней)</th>
+      <th scope="col">Возможное отклонение (дней)</th>
+      <th scope="col">Инструменты</th>
     </tr>
-  </thead>
-
-  <tbody>
+    </thead>
+    <tbody>
     <% @goals.each do |goal| %>
       <% if goal.visibility? %>
-        <tr>
-          <td><%= goal.user.email %></td>
-          <td><%= goal.title %></td>
-          <td><%= goal.optimal_days %></td>
-          <td><%= goal.normal_days %></td>
-          <td><%= goal.pessimistic_days %></td>
-          <td><%= goal.expected_days %></td>
-          <td><%= goal.deviation_days %></td>
-          <td><%= link_to 'Show', goal %></td>
-          <td><%= link_to 'Edit', edit_goal_path(goal) %></td>
-          <td><%= link_to 'Удалить', goal_path(goal), method: :delete, data: { confirm: 'Уверены?' } %></td>
-          <td><%= link_to 'Архивировать', set_fact_day_goal_path(goal) %></td>
+        <tr class="text-center">
+          <td class="align-middle"><%= goal.title %></td>
+          <td class="align-middle"><%= goal.expected_days %></td>
+          <td class="align-middle"><%= goal.deviation_days %></td>
+          <td class="align-middle">
+            <%= link_to t('views.button.show'), goal %><br>
+            <%= link_to t('views.button.edit'), edit_goal_path(goal) %><br>
+            <%= link_to t('views.button.delete'), goal_path(goal), method: :delete, data: { confirm: t('views.delete.confirm') } %><br>
+            <%= link_to t('views.button.arhiv'), set_fact_day_goal_path(goal) %>
+          </td>
         </tr>
       <% end %>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
+
 
 <br>
 
-<%= link_to 'New Goal', new_goal_path %>
+<%= link_to 'Добавить задачу', new_goal_path, class: 'btn btn-secondary' %>

@@ -3,7 +3,6 @@ class GoalsController < ApplicationController
   before_action :authenticate_user!
 
   after_action :set_visible, only: [:create]
-  after_action :set_unvisible, only: [:update_fact_day]
 
   # GET /goals
   # GET /goals.json
@@ -57,6 +56,7 @@ class GoalsController < ApplicationController
   def update_fact_day
     respond_to do |format|
       if @goal.update(goal_params) && @goal.valid?(:fact_days_check)
+        @goal.update(visibility: false)
         format.html { redirect_to goals_path, notice: 'Цель успешно заархивирована' }
       else
         format.html { render :set_fact_day }
@@ -83,7 +83,7 @@ class GoalsController < ApplicationController
 
     def goal_params
       if params[:update_fact_days]
-        params.require(:goal).permit(:fact_days, :visibility)
+        params.require(:goal).permit(:fact_days)
       else
         params.require(:goal).permit(:title, :optimal_days, :normal_days, :pessimistic_days)
       end
@@ -91,9 +91,5 @@ class GoalsController < ApplicationController
 
     def set_visible
       @goal.update(visibility: true)
-    end
-
-    def set_unvisible
-      @goal.update(visibility: false)
     end
 end

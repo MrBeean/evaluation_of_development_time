@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Pert</title>
+    <title><%= t('app.name') %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,18 +10,43 @@
   </head>
 
   <body>
-    <ul>
-      <% if user_signed_in? %>
-        <li style="display: inline;">Вы вошли как пользователь <%= current_user.email %></li>
-        <li style="display: inline;"><%= link_to 'Профиль', edit_user_registration_path %></li>
-        <li style="display: inline;"><%= link_to 'Выйти', destroy_user_session_path,
-                        method: :delete %></li>
-      <% else %>
-        <li style="display: inline;"><%= link_to 'Войти', new_user_session_path %></li>
-        <li style="display: inline;"><%= link_to 'Зарегистрироваться',
-                        new_user_registration_path %></li>
-      <% end %>
-      <%= yield %>
-    </ul>
+  <nav class="navbar navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to 'PERT - методология планирования времени на задачу', root_path, class: 'navbar-brand uppcase', id: 'main' %>
+      </div>
+      <form class="form-inline my-2 my-lg-0">
+        <% if user_signed_in? %>
+          <p class="navbar-text">Вы вошли как пользователь
+            <%= link_to "#{current_user.email}", edit_user_registration_path, class: 'mr-2' %>
+            <%= link_to 'Выйти', destroy_user_session_path,
+                        method: :delete, class: 'btn btn-outline-secondary' %>
+          </p>
+        <% else %>
+          <%= link_to 'Войти', new_user_session_path, class: 'btn btn-outline-secondary mr-2' %>
+          <%= link_to 'Зарегистрироваться', new_user_registration_path, class: 'btn btn-outline-secondary' %>
+        <% end %>
+      </form>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="alert-message">
+          <%= render partial: 'layouts/flash', flash: flash %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+
   </body>
 </html>

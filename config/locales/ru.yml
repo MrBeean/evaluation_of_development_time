@@ -1,0 +1,86 @@
+ru:
+  app:
+    name: 'Расчитай время на разработку'
+
+  activerecord:
+    models:
+      user: 'Пользователь'
+      goal: 'Задача'
+    attributes:
+      user:
+        email: 'Email'
+        password: 'Пароль'
+        current_password: 'Текущий пароль'
+        password_confirmation: 'Подтверждение пароля'
+      goal:
+        title: 'Название'
+        optimal_days: 'Оптимистическая оценка'
+        normal_days: 'Номинальная оценка'
+        pessimistic_days: 'Пессимистическая оценка'
+        expected_days: 'Ожидаемая продолжительность'
+        deviation_days: 'Возможное отклонение'
+        fact_days: 'Фактически потрачено'
+        visibility: 'Видимость'
+
+    errors:
+      models:
+        goal:
+          attributes:
+            title:
+              blank: 'Не может быть пустым'
+              greater_than: 'Должно быть больше 0'
+            optimal_days:
+              blank: 'Не может быть пустым'
+              greater_than: 'Должно быть больше 0'
+            normal_days:
+              blank: 'Не может быть пустым'
+              greater_than: 'Должно быть больше 0'
+            pessimistic_days:
+              blank: 'Не может быть пустым'
+              greater_than: 'Должно быть больше 0'
+            fact_days:
+              blank: 'Не может быть пустым'
+              greater_than: 'Должно быть больше 0'
+
+  controllers:
+    goals:
+      created: 'Задача успешно создана.'
+      updated: 'Задача успешно обновлена.'
+      destroyed: 'Задача успешно удалена.'
+    users:
+      updated: 'Ваши данные успешно обновлены'
+
+  simple_form:
+    "yes": 'Да'
+    "no": 'Нет'
+    required:
+      text: 'обязательно'
+      mark: '*'
+    error_notification:
+      default_message: 'Пожалуйста, исправьте следующте проблемы:'
+
+  devise:
+    errors:
+      edit_form:
+        few: "%{count} символов минимум"
+        many: "%{count} символов минимум"
+        one: "%{count} символ минимум"
+        other: "%{count} символ минимум"
+
+  views:
+    delete:
+      confirm: "Вы уверены?"
+    button:
+      back: "Назад"
+      save: "Сохранить"
+      edit: "Изменить"
+      show: "Посмотреть"
+      delete: "Удалить"
+      arhiv: "Архивировать"
+
+    sentence:
+      one: "%{count} день"
+      few: "%{count} дня"
+      many: "%{count} дней"
+      other: "%{count} дня"
+
