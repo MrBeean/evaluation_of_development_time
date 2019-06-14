@@ -21,7 +21,6 @@ ru:
         deviation_days: 'Возможное отклонение'
         fact_days: 'Фактически потрачено'
         visibility: 'Видимость'
-
     errors:
       models:
         goal:
@@ -41,6 +40,15 @@ ru:
             fact_days:
               blank: 'Не может быть пустым'
               greater_than: 'Должно быть больше 0'
+        user:
+          attributes:
+            email:
+              taken: 'Такой email уже занят'
+            password:
+              blank: 'Пароль не может быть пустым'
+              too_short: 'Слишком короткий'
+            password_confirmation:
+              confirmation: 'Пароли не совпадают'
 
   controllers:
     goals:
@@ -60,6 +68,14 @@ ru:
       default_message: 'Пожалуйста, исправьте следующте проблемы:'
 
   devise:
+    failure:
+      user:
+        unauthenticated: 'Нужно авторизоваться'
+        invalid: 'Пользователь или пароль не верный'
+    sessions:
+      user:
+        signed_out: 'До скорой встречи'
+        signed_in: 'С возвращением!'
     errors:
       edit_form:
         few: "%{count} символов минимум"
@@ -83,4 +99,3 @@ ru:
       few: "%{count} дня"
       many: "%{count} дней"
       other: "%{count} дня"
-

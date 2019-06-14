@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :goal do
-    user { nil }
+    user
     title { "" }
     optimal_days { 1 }
     normal_days { 1 }
