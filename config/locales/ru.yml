@@ -40,6 +40,8 @@ ru:
             fact_days:
               blank: 'Не может быть пустым'
               greater_than: 'Должно быть больше 0'
+            user:
+              required: 'Должен быть пользователь'
         user:
           attributes:
             email:

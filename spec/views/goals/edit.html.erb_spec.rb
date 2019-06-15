@@ -1,36 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe "goals/edit", type: :view do
-  before(:each) do
-    @goal = assign(:goal, Goal.create!(
-      :user => nil,
-      :title => "",
-      :optimal_days => 1,
-      :normal_days => 1,
-      :pessimistic_days => 1,
-      :expected_days => 1,
-      :deviation_days => 1
-    ))
+  let(:goal) { create(:visible_goal) }
+
+  context 'without login' do
+    it 'renders error without login' do
+      visit edit_goal_path(goal)
+
+      expect(page).to have_content('Нужно авторизоваться')
+    end
   end
 
-  it "renders the edit goal form" do
-    render
+  context 'with login' do
+    it "renders the edit goal form" do
+      login_as(goal.user, scope: :user)
+      visit edit_goal_path(goal)
 
-    assert_select "form[action=?][method=?]", goal_path(@goal), "post" do
-
-      assert_select "input[name=?]", "goal[user_id]"
-
-      assert_select "input[name=?]", "goal[title]"
-
-      assert_select "input[name=?]", "goal[optimal_days]"
-
-      assert_select "input[name=?]", "goal[normal_days]"
-
-      assert_select "input[name=?]", "goal[pessimistic_days]"
-
-      assert_select "input[name=?]", "goal[expected_days]"
-
-      assert_select "input[name=?]", "goal[deviation_days]"
+      aggregate_failures 'expected result' do
+        expect(page).to have_content('Изменение цели')
+        expect(page).to have_content('Название')
+        expect(page).to have_content('Оптимистическая оценка')
+        expect(page).to have_content('Номинальная оценка')
+        expect(page).to have_content('Пессимистическая оценка')
+      end
     end
   end
 end

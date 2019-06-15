@@ -35,3 +35,5 @@
 
 .idea
 .ruby-gemset
+
+/coverage
