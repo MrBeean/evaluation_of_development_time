@@ -26,3 +26,5 @@
 ### Тесты
 
     bundle exec rspec/spec
+
+![](https://evaluation-of-development-time.herokuapp.com/pert_coverage.png)
