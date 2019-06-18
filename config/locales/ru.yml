@@ -78,6 +78,7 @@ ru:
       user:
         signed_out: 'До скорой встречи'
         signed_in: 'С возвращением!'
+        signed_up: 'Теперь у тебя все получится!'
     errors:
       edit_form:
         few: "%{count} символов минимум"
